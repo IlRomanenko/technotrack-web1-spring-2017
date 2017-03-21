@@ -1,0 +1,17 @@
+{% extends 'core/base.html' %}
+
+{% block title %}
+    <h2>Главная страница</h2>
+{% endblock %}
+
+{% block content %}
+    <p>Всего блогов : {{ blogs_total }}</p>
+    <p>Всего постов : {{ posts_total }}</p>
+    <p>Всего комментариев : {{ comments_total }}</p>
+    <p>
+        <a href="{% url 'blogs:blogs_list' %}">Все блоги</a>
+    </p>
+    <p>
+        <a href="{% url 'blogs:posts_list' %}">Все посты</a>
+    </p>
+{% endblock %}

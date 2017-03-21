@@ -1,0 +1,36 @@
+{% extends 'core/base.html' %}
+{% block title %}
+    <h2>{{ blog.title }}</h2>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'index' %}">На главную</a></li>
+        <li><a href="{% url 'blogs:blogs_list' %}">К списку блогов</a></li>
+        <li class="active">Блог</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div>
+    <h4>Описание</h4>
+        <p>
+            {{ blog.description }}
+        </p>
+    </div>
+
+    <br>
+
+    <h4>Посты в блоге</h4>
+    {% for post in blog.post_set.all %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ post.name }}</h3>
+            </div>
+            <div class="panel-body">{{ post.content }}
+            </div>
+            <div class="panel-footer">
+                <a href="{% url 'blogs:detail_post_view' pk=post.id %}">
+                    Все комментарии к этому посту ( {{ post.comment_set.count }} )
+                </a>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
