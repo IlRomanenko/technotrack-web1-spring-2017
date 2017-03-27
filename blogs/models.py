@@ -16,8 +16,6 @@ class Category(models.Model):
     def __str__(self):
         return self.type
 
-    pass
-
 
 class Blog(models.Model):
     title = models.CharField(max_length=1000)
@@ -37,8 +35,6 @@ class Blog(models.Model):
     def __str__(self):
         return self.title
 
-    pass
-
 
 class Post(models.Model):
     name = models.CharField(max_length=1000)
@@ -57,5 +53,3 @@ class Post(models.Model):
 
     def __str__(self):
         return self.name
-
-    pass

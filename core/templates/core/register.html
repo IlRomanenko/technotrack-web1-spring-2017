@@ -10,9 +10,6 @@
     {% if user.is_authenticated %}
         Вы уже залогинены, разлогиньтесь!
     {% endif %}
-    {% if form.errors %}
-        {{ form.errors }}
-    {% endif %}
 
     <form method="post" enctype="multipart/form-data">
         {% csrf_token %}

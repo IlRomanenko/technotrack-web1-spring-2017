@@ -21,8 +21,6 @@ class IndexView(TemplateView):
                    "comments_total": Comment.objects.count()}
         return context
 
-    pass
-
 
 class CustomUserCreationForm(UserCreationForm):
     class Meta:

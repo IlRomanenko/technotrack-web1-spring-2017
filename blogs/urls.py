@@ -16,7 +16,8 @@ Including another URLconf
 from django.conf.urls import url
 from django.contrib.auth.decorators import login_required
 
-from .views import BlogsView, PostsView, DetailedBlogView, DetailedPostView, CreateBlogView, CreatePostView
+from .views import BlogsView, PostsView, DetailedBlogView, DetailedPostView, CreateBlogView, CreatePostView, \
+    CreatePostInBlog
 from .views import EditBlogView, EditPostView
 
 # ?P<blog_id>[0-9]+
@@ -33,5 +34,6 @@ urlpatterns = [
     url(r'^post/(?P<pk>\d+)/$', DetailedPostView.as_view(), name='detail_post'),
 
     url(r'^post/(?P<pk>\d+)/edit', login_required(EditPostView.as_view()), name='edit_post'),
-    url(r'^post/create/(?P<blog_id>\d+)/$', CreatePostView.as_view(), name='create_post'),
+    url(r'^post/create/(?P<blog_id>\d+)/$', login_required(CreatePostView.as_view()), name='create_post'),
+    url(r'^post/create/$', login_required(CreatePostInBlog.as_view()), name='create_post_in_blog'),
 ]

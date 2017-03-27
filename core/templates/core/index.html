@@ -17,4 +17,10 @@
     <p>
         <a href="{% url 'comments:comments_list' %}">Все комментарии</a>
     </p>
+    <p>
+        <a class="btn btn-default" href="{% url 'blogs:create_blog' %}">Добавить новый блог</a>
+    </p>
+    <p>
+        <a class="btn btn-default" href="{% url 'blogs:create_post_in_blog' %}">Добавить новый пост</a>
+    </p>
 {% endblock %}

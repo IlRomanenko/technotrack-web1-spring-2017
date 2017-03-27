@@ -11,8 +11,6 @@ class CommentsView(ListView):
     template_name = 'comments/comment_list.html'
     model = Comment
 
-    pass
-
 
 class AddCommentView(CreateView):
     model = Comment
@@ -32,5 +30,3 @@ class AddCommentView(CreateView):
         form.instance.author = self.request.user
         form.instance.post = self._post
         return super(AddCommentView, self).form_valid(form)
-
-    pass
