@@ -1,0 +1,48 @@
+{% extends 'core/base.html' %}
+{% block title %}
+    <h2>{{ post.name }}</h2>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:mainpage' %}">На главную</a></li>
+        <li><a href="{% url 'blogs:detail_blog' pk=post.blog_id %}">К блогу</a></li>
+        <li class="active">Пост</li>
+    </ol>
+{% endblock %}
+
+{% block content %}
+    <div>
+        <h4>Описание</h4>
+        <p>
+            {{ post.content }}
+        </p>
+    </div>
+
+    <br>
+
+    <h4>Комментарии к посту</h4>
+
+    {% if user.is_authenticated %}
+        <div class="container">
+            <a class="btn btn-default" href="{% url 'comments:add_comment' post_id=post.id %}">
+                Добавить новый комметарий
+            </a>
+        </div>
+        <br>
+    {% endif %}
+
+    {% for comment in post.comment_set.all %}
+        <div class="panel panel-default">
+            <div class="panel-body">{{ comment.content }}
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-6">
+                        {{ comment.author }}
+                    </div>
+                    <div class="col-xs-6" align="right">
+                        {{ comment.creation_time }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}

@@ -1,0 +1,38 @@
+{% extends "core/base.html" %}
+
+{% block title %}
+    <h2>Список комментариев</h2>
+    <ol class="breadcrumb">
+        <li><a href="{% url 'core:mainpage' %}">На главную</a></li>
+        <li><a href="#" class="active">Список комментариев</a></li>
+    </ol>
+{% endblock %}
+
+
+{% block content %}
+    {% for blog in blog_list %}
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{ blog.title }}</h3>
+            </div>
+            <div class="panel-body">
+                {{ blog.description }}
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-xs-3">
+                        <a href="{% url 'blogs:detail_blog_view' pk=blog.id %}">
+                            Все посты этого блога ( {{ blog.post_set.count }} )
+                        </a>
+                    </div>
+                    <div class="col-xs-3">
+                        Создано: {{ blog.creation_time }}
+                    </div>
+                    <div class="col-xs-6" align="right">
+                        Последнее обновление: {{ blog.updated_time }}
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+{% endblock %}
