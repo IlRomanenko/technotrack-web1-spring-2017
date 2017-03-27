@@ -50,6 +50,13 @@
                         Последнее обновление: {{ blog.updated_time }}
                     </div>
                 </div>
+                <br>
+                <div class="row">
+                    <div class="col-xs-2">Категории :</div>
+                    {% for category in blog.categories.all %}
+                        <div class="col-xs-2">{{ category }}</div>
+                    {% endfor %}
+                </div>
             </div>
         </div>
     {% endfor %}

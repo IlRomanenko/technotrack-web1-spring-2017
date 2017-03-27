@@ -24,19 +24,21 @@ class PostsView(ListView):
 class DetailedBlogView(DetailView):
     model = Blog
     template_name = 'blogs/detail_blog.html'
+
     pass
 
 
 class DetailedPostView(DetailView):
     model = Post
     template_name = 'blogs/detail_post.html'
+
     pass
 
 
 class EditBlogView(UpdateView):
     model = Blog
     template_name = 'blogs/create_blog.html'
-    fields = ('title', 'description')
+    fields = ('title', 'description', 'categories',)
 
     def get_success_url(self):
         return reverse('blogs:blogs_list')
@@ -47,7 +49,7 @@ class EditBlogView(UpdateView):
 class CreateBlogView(CreateView):
     model = Blog
     template_name = 'blogs/create_blog.html'
-    fields = ('title', 'description',)
+    fields = ('title', 'description', 'categories',)
 
     def get_success_url(self):
         return reverse('blogs:blogs_list')

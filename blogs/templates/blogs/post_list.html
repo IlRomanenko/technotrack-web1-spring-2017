@@ -28,16 +28,19 @@
             <div class="panel-body">{{ post.content }}
             </div>
             <div class="panel-footer">
-                <div class="row">
+               <div class="row">
                     <div class="col-xs-3">
                         <a href="{% url 'blogs:detail_post' pk=post.id %}">
                             Все комментарии к этому посту ( {{ post.comment_set.count }} )
                         </a>
                     </div>
-                    <div class="col-xs-3">
+                    <div class="col-xs-2">
+                        Лайков: {{ post.like_set.count }}
+                    </div>
+                    <div class="col-xs-2">
                         Создано: {{ post.creation_time }}
                     </div>
-                    <div class="col-xs-6" align="right">
+                    <div class="col-xs-5" align="right">
                         Последнее обновление: {{ post.updated_time }}
                     </div>
                 </div>
