@@ -1,13 +1,11 @@
 from django.db import models
+
 from webapp import settings
 
 
-class Comment(models.Model):
-
+class Like(models.Model):
     author = models.ForeignKey(settings.AUTH_USER_MODEL)
-    content = models.TextField()
-    post = models.ForeignKey('blogs.Post')
-
     creation_time = models.DateTimeField(auto_now=True)
+    post = models.ForeignKey('blogs.Post')
 
     pass

@@ -16,7 +16,17 @@ Including another URLconf
 from django.conf.urls import url, include
 from django.contrib import admin
 
+from webapp import settings
+
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
-    url(r'^', include('core.urls'), name='index'),
+    url(r'^core/', include('core.urls', namespace='core')),
+    url(r'^blogs/', include('blogs.urls', namespace='blogs')),
+    url(r'comments/', include('comments.urls', namespace='comments')),
 ]
+
+
+if settings.DEBUG is True:
+    from django.conf.urls.static import static
+
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

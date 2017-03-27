@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'widget_tweaks',
     'core.apps.CoreConfig',
     'blogs.apps.BlogsConfig',
     'comments.apps.CommentsConfig',
@@ -128,3 +129,10 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = '/run/media/ilya/Data/Projects/MIPT/Tehnotrack/WebProject/src/media/'
+
+LOGIN_REDIRECT_URL = "core:mainpage"
+
+LOGIN_URL = "core:login"
