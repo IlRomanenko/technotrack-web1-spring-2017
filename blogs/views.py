@@ -1,3 +1,4 @@
+from django.forms import ModelForm
 from django.shortcuts import get_object_or_404
 from django.urls import reverse
 from django.views.generic import CreateView
@@ -60,7 +61,7 @@ class CreatePostView(CreateView):
     _blog = None
 
     def dispatch(self, request, blog_id=None, *args, **kwargs):
-        self._blog = get_object_or_404(Blog.objects.all(), id=blog_id)
+        self._blog = get_object_or_404(Blog.objects.filter(author=self.request.user).all(), id=blog_id)
         return super(CreatePostView, self).dispatch(request, *args, **kwargs)
 
     def get_success_url(self):
@@ -90,10 +91,21 @@ class EditPostView(UpdateView):
         return reverse('blogs:detail_blog', kwargs={'pk': self._blog.id})
 
 
+class CreatePostInBlogForm(ModelForm):
+    class Meta:
+        model = Post
+        fields = ('name', 'content', 'blog',)
+
+    def __init__(self, user=None, **kwargs):
+        super(CreatePostInBlogForm, self).__init__(**kwargs)
+        self.fields['blog'].queryset = Blog.objects.filter(author=user).all()
+
+
 class CreatePostInBlog(CreateView):
-    model = Post
     template_name = 'blogs/create_post.html'
-    fields = ('name', 'content', 'blog')
+
+    def get_form(self, form_class=None):
+        return CreatePostInBlogForm(self.request.user)
 
     def get_success_url(self):
         return reverse('blogs:detail_blog', kwargs={'pk': self.object.blog.id})
